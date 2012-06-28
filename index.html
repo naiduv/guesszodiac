@@ -1,21 +1,23 @@
 <title>Guess Zodiac Signs</title>
+Under Construction
 <html>
 <body>
-
 <script type="text/javascript">
 	var jsonstr = {"bindings": [
-        {"name": "Lebron James", "birthday": "12301984", "wiki": "http://www.google.com", "image": "./lebronjames.png"},    	]
+        {"name": "Lebron James", "sign": "Capricorn", "wiki": "http://www.google.com", "image": "./lebronjames.png"},    	]
 	};
 
 	window.onload = function() {
-		document.write('<p><img src="'+jsonstr.bindings[0].image+'"><img></p>');
+		document.write('<p><img src="'+jsonstr.bindings[0].image+'"></img><img src= "./next.png" width="100" height="100" onclick="onNextClick()" ></img></p>');
 		document.write('<p>'+jsonstr.bindings[0].name+'</p>');
-		document.write('<p>'+jsonstr.bindings[0].birthday+'</p>');
+		document.write('<p>'+jsonstr.bindings[0].sign+'</p>');
+	}
+
+	onNextClick = function()
+	{
+		alert("you");
 	}
 
 </script>
-
-
-
 </body>
 <html>
