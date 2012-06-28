@@ -1,0 +1,3 @@
+to run node in bkgnd
+
+node test.js &
