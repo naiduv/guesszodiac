@@ -4,18 +4,51 @@ Under Construction
 <body>
 <script type="text/javascript">
 	var jsonstr = {"bindings": [
-        {"name": "Lebron James", "sign": "Capricorn", "wiki": "http://www.google.com", "image": "./lebronjames.png"},    	]
+        {"name": "Lebron James", "sign": "Capricorn", "wiki": "http://en.wikipedia.org/wiki/Lebron_James", "image": "./lebronjames.png"},
+        {"name": "Adolf Hitler", "sign": "Taurus", "wiki": "http://en.wikipedia.org/wiki/Adolf_Hitler", "image": "./adolfhitler.png"},
+        {"name": "Barack Obama", "sign": "Leo", "wiki": "en.wikipedia.org/wiki/Barack_Obama", "image": "./barackobama.png"},    	]
 	};
 
 	window.onload = function() {
-		document.write('<p><img src="'+jsonstr.bindings[0].image+'"></img><img src= "./next.png" width="100" height="100" onclick="onNextClick()" ></img></p>');
-		document.write('<p>'+jsonstr.bindings[0].name+'</p>');
-		document.write('<p>'+jsonstr.bindings[0].sign+'</p>');
+		drawpage();
 	}
 
-	onNextClick = function()
+	var currimage = 0;
+	var score = 0;
+
+	onnext = function()
 	{
-		alert("you");
+		if(currimage < jsonstr.bindings.length-1)
+			currimage++;
+		else
+			currimage = score = 0;
+
+		updatepage();
+	}
+
+	updatepage = function()
+	{
+		drawpage();
+	}
+
+	onselectchange = function(guess)
+	{
+		if(guess == jsonstr.bindings[currimage].sign) {
+			document.write('<p>You guessed Correctly! Your score is'+score +'/'+(currimage+1)+'</p>');
+			score++;
+		} else {
+			document.write('<p>Ooops! Correct guess was '+jsonstr.bindings[currimage].sign+'. Your score is'+score +'/'+(currimage+1)+'</p>');
+		}
+
+		document.write('</img><img src= "./next.png" width="100" height="100" onclick="onnext()" ></img>');
+	}
+
+	drawpage = function()
+	{
+		document.body.innerHTML = ''
+		document.write('<p><img src="'+jsonstr.bindings[currimage].image+'"></p>');
+		document.write('<p>'+jsonstr.bindings[currimage].name+'</p>');
+		document.write('<select onchange="onselectchange(value)"><option value="Aries">Aries</option><option value="Taurus">Taurus</option><option value="Gemini">Gemini</option><option value="Cancer">Cancer</option><option value="Leo">Leo</option><option value="Virgo">Virgo</option><option value="Libra">Libra</option><option value="Scorpio">Scorpio</option><option value="Sagittarius">Sagittarius</option><option value="Capricorn">Capricorn</option><option value="Aquarius">Aquarius</option><option value="Pisces">Pisces</option></select>');
 	}
 
 </script>
