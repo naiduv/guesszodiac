@@ -7,7 +7,7 @@
 		drawpage();
 	}
 
-	var numpages = jsonstr.bindings.length-1;
+	var numpages = jsonstr.bindings.length;
 	var currimage = Math.floor(Math.random()*numpages);
 	var numshown = 0;
 	var score = 0;
@@ -15,7 +15,7 @@
 
 	onnext = function()
 	{
-		if(currimage < numpages)
+		if(currimage < numpages-1)
 			currimage++;
 		else
 			currimage = 0;
