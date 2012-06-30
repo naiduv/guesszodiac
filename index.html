@@ -1,5 +1,4 @@
 <title>Guess Zodiac Signs</title>
-Under Construction
 <html>
 <body>
 <script type="text/javascript">
@@ -15,6 +14,7 @@ Under Construction
 
 	var currimage = 0;
 	var score = 0;
+	var hasguessed = false;
 
 	onnext = function()
 	{
@@ -33,24 +33,37 @@ Under Construction
 
 	onselectchange = function(guess)
 	{
+		if(hasguessed)
+			return;
+
+		hasguessed = true;
+
+		document.write('<center>');
 		if(guess == jsonstr.bindings[currimage].sign) {
-			document.write('<p>You guessed Correctly! Your score is'+score +'/'+(currimage+1)+'</p>');
+			document.write('<p>You guessed Correctly!</p>');
 			score++;
 		} else {
-			document.write('<p>Ooops! Correct guess was '+jsonstr.bindings[currimage].sign+'. Your score is'+score +'/'+(currimage+1)+'</p>');
+			document.write('<p>Ooops! Correct guess was '+jsonstr.bindings[currimage].sign+'.');
 		}
 
+		document.write('<p>Your score is '+score +'/'+(currimage+1)+'</p>');
 		document.write('</img><img src= "./next.png" width="100" height="100" onclick="onnext()" ></img>');
+		document.write('</center>');
 	}
 
 	drawpage = function()
 	{
+		hasguessed = false;
 		document.body.innerHTML = ''
+
+		document.write('<center>');
 		document.write('<p><img src="'+jsonstr.bindings[currimage].image+'"></p>');
 		document.write('<p>'+jsonstr.bindings[currimage].name+'</p>');
-		document.write('<select onchange="onselectchange(value)"><option value="Aries">Aries</option><option value="Taurus">Taurus</option><option value="Gemini">Gemini</option><option value="Cancer">Cancer</option><option value="Leo">Leo</option><option value="Virgo">Virgo</option><option value="Libra">Libra</option><option value="Scorpio">Scorpio</option><option value="Sagittarius">Sagittarius</option><option value="Capricorn">Capricorn</option><option value="Aquarius">Aquarius</option><option value="Pisces">Pisces</option></select>');
+		document.write('Guess Zodiac! <select onchange="onselectchange(value)"><option value="Aries">Aries</option><option value="Taurus">Taurus</option><option value="Gemini">Gemini</option><option value="Cancer">Cancer</option><option value="Leo">Leo</option><option value="Virgo">Virgo</option><option value="Libra">Libra</option><option value="Scorpio">Scorpio</option><option value="Sagittarius">Sagittarius</option><option value="Capricorn">Capricorn</option><option value="Aquarius">Aquarius</option><option value="Pisces">Pisces</option></select>');
+		document.write('</center>');
 	}
 
 </script>
+</center>
 </body>
 <html>
