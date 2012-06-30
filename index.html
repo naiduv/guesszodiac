@@ -7,16 +7,18 @@
 		drawpage();
 	}
 
-	var currimage = 0;
+	var numpages = jsonstr.bindings.length;
+	var currimage = Math.floor((Math.random()*numpages)+1);
+	var numshown = 0;
 	var score = 0;
 	var hasguessed = false;
 
 	onnext = function()
 	{
-		if(currimage < jsonstr.bindings.length-1)
+		if(currimage < numpages-1)
 			currimage++;
 		else
-			currimage = score = 0;
+			currimage = 0;
 
 		updatepage();
 	}
@@ -41,13 +43,15 @@
 			document.write('<p>Ooops! Correct guess was '+jsonstr.bindings[currimage].sign+'.');
 		}
 
-		document.write('<p>Your score is '+score +'/'+(currimage+1)+'</p>');
+		document.write('<p>Your score is '+score +'/'+numshown+'</p>');
 		document.write('</img><img src= "./next.png" width="100" height="100" onclick="onnext()" ></img>');
 		document.write('</center>');
 	}
 
 	drawpage = function()
 	{
+		numshown++;
+
 		hasguessed = false;
 		document.body.innerHTML = ''
 
