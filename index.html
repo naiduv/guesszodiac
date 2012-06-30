@@ -5,7 +5,7 @@
 <body>
 	<center>
 		<p id="image"></p>
-		<p id="name"></p>
+		<p id="fullname"></p>
 		<p id="guess"></p>
 		<p id="result"></p>
 	</center>
@@ -76,11 +76,9 @@
 		image.innerHTML = '';
 		image.innerHTML = '<img src="'+jsonstr.bindings[currimage].image+'"><img>';		
 
-
-		name = document.getElementById("name");
-		name.innerHTML = '';
-		name.innerHTML = '<img src="'+jsonstr.bindings[currimage].name+'"><img>'
-
+		fullname = document.getElementById("fullname");
+		fullname.innerHTML = '';
+		fullname.innerHTML = jsonstr.bindings[currimage].name;		
 		guess = document.getElementById("guess");
 		guess.innerHTML = '';
 		guess.innerHTML = 'Guess <select onchange="onselectchange(value)"><option value="Zodiac">Zodiac</option><option value="Aries">Aries</option><option value="Taurus">Taurus</option><option value="Gemini">Gemini</option><option value="Cancer">Cancer</option><option value="Leo">Leo</option><option value="Virgo">Virgo</option><option value="Libra">Libra</option><option value="Scorpio">Scorpio</option><option value="Sagittarius">Sagittarius</option><option value="Capricorn">Capricorn</option><option value="Aquarius">Aquarius</option><option value="Pisces">Pisces</option></select>';
