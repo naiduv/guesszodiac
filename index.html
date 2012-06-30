@@ -1,6 +1,15 @@
-<title>Guess Zodiac Signs</title>
 <html>
+<head>
+<title>Guess Zodiac Signs</title>
+</head>
 <body>
+	<center>
+		<p id="image"></p>
+		<p id="name"></p>
+		<p id="guess"></p>
+		<p id="result"></p>
+	</center>
+
 <script src = "./jsonstr.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
@@ -15,6 +24,9 @@
 
 	onnext = function()
 	{
+		result = document.getElementById("result");
+		result.innerHTML = '';
+
 		if(currimage < numpages-1)
 			currimage++;
 		else
@@ -35,17 +47,21 @@
 
 		hasguessed = true;
 
-		document.write('<center>');
+		resultstr = '';
+
 		if(guess == jsonstr.bindings[currimage].sign) {
-			document.write('<p>You guessed Correctly!</p>');
+			resultstr = '<p>You guessed Correctly!</p>';
 			score++;
 		} else {
-			document.write('<p>Ooops! Correct guess was '+jsonstr.bindings[currimage].sign+'.');
+			resultstr= '<p>Ooops! Correct guess was '+jsonstr.bindings[currimage].sign+'.</p>';
 		}
 
-		document.write('<p>Your score is '+score +'/'+numshown+'</p>');
-		document.write('</img><img src= "./next.png" width="100" height="100" onclick="onnext()" ></img>');
-		document.write('</center>');
+		resultstr += '<p>Your score is '+score +'/'+numshown+'</p>';
+		resultstr += '<p></img><img src= "./next.png" width="100" height="100" onclick="onnext()" ></img></p>';
+
+		result = document.getElementById("result");
+		result.innerHTML = '';
+		result.innerHTML = resultstr;
 	}
 
 	drawpage = function()
@@ -53,13 +69,21 @@
 		numshown++;
 
 		hasguessed = false;
-		document.body.innerHTML = ''
 
-		document.write('<center>');
-		document.write('<p><img src="'+jsonstr.bindings[currimage].image+'"></p>');
-		document.write('<p>'+jsonstr.bindings[currimage].name+'</p>');
-		document.write('Guess Zodiac! <select onchange="onselectchange(value)"><option value="Aries">Aries</option><option value="Taurus">Taurus</option><option value="Gemini">Gemini</option><option value="Cancer">Cancer</option><option value="Leo">Leo</option><option value="Virgo">Virgo</option><option value="Libra">Libra</option><option value="Scorpio">Scorpio</option><option value="Sagittarius">Sagittarius</option><option value="Capricorn">Capricorn</option><option value="Aquarius">Aquarius</option><option value="Pisces">Pisces</option></select>');
-		document.write('</center>');
+		// document.body.innerHTML = '';
+
+		image = document.getElementById("image");
+		image.innerHTML = '';
+		image.innerHTML = '<img src="'+jsonstr.bindings[currimage].image+'"><img>';		
+
+
+		name = document.getElementById("name");
+		name.innerHTML = '';
+		name.innerHTML = '<img src="'+jsonstr.bindings[currimage].name+'"><img>'
+
+		guess = document.getElementById("guess");
+		guess.innerHTML = '';
+		guess.innerHTML = 'Guess <select onchange="onselectchange(value)"><option value="Zodiac">Zodiac</option><option value="Aries">Aries</option><option value="Taurus">Taurus</option><option value="Gemini">Gemini</option><option value="Cancer">Cancer</option><option value="Leo">Leo</option><option value="Virgo">Virgo</option><option value="Libra">Libra</option><option value="Scorpio">Scorpio</option><option value="Sagittarius">Sagittarius</option><option value="Capricorn">Capricorn</option><option value="Aquarius">Aquarius</option><option value="Pisces">Pisces</option></select>';
 	}
 
 </script>
