@@ -11,6 +11,8 @@
 	</center>
 
 <script src = "./jsonstr.js"></script>
+<script src = "http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
 <script type="text/javascript">
 	window.onload = function() {
 		drawpage();
@@ -37,7 +39,18 @@
 
 	updatepage = function()
 	{
-		drawpage();
+		drawpage();        
+		writefile();
+	}
+
+	function success()
+	{
+		alert('yo;')
+	}
+
+	function writefile()
+	{
+		var jqxhr = jQuery.post("http://www.guesszodiac:5001",success());
 	}
 
 	onselectchange = function(guess)
