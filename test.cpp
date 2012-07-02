@@ -19,8 +19,8 @@ int main( int argc, char *argv[] )
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) 
     {
-        perror("ERROR opening socket");
-	return(0);
+      cout<<"\nERROR opening socket";
+      return(0);
     }
     /* Initialize socket structure */
     memset((char *) &serv_addr, 0, sizeof(serv_addr));
@@ -33,8 +33,8 @@ int main( int argc, char *argv[] )
     if (bind(sockfd, (struct sockaddr *) &serv_addr,
                           sizeof(serv_addr)) < 0)
     {
-         perror("ERROR on binding");
-         return(0);
+      cout<<"\nERROR on binding";
+      return(0);
     }
 
     /* Now start listening for the clients, here process will
@@ -51,15 +51,15 @@ int main( int argc, char *argv[] )
 
      if (newsockfd < 0) 
        {
-	 perror("ERROR on accept");
+	 cout<<"\nERROR on accept";
 	 return(0);
        }
 
      /* If connection is established then start communicating */
      memset(buffer, 0, sizeof(buffer));
-     n = recv( newsockfd,buffer,sizeof(buffer),MSG_PEEK);
+     n = read(newsockfd,buffer,sizeof(buffer));
      if (n < 0){
-	 perror("ERROR reading from socket");
+         cout<<"\nERROR reading from socket";
 	 return(0);
      }
 
@@ -93,7 +93,7 @@ int main( int argc, char *argv[] )
      /* Write a response to the client */
      n = write(newsockfd,"msg received",12);
      if (n < 0) {
-	 perror("ERROR writing to socket");
+         cout<<"\nERROR writing to socket";
          return(0);
        }
 
