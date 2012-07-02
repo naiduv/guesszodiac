@@ -60,9 +60,10 @@
 
 	function updatecomments()
 	{
-		commentsarea = document.getElementById("commentsarea");
+		commentsarea = document.getElementById("commentsarea");          
+                commentsarea.innerHTML = '';
 		i = 0;
-		while(i<1){
+		while(i<comments.bindings.length){
 			commentsarea.innerHTML = comments.bindings[i].comment;
 			i++;
 		}

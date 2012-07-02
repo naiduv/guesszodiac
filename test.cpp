@@ -4,6 +4,7 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -39,8 +40,8 @@ int main( int argc, char *argv[] )
     /* Now start listening for the clients, here process will
     * go in sleep mode and will wait for the incoming connection
     */
-   int count = 0;
-   while(count<1) {
+    while(1) {
+
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
 
@@ -66,8 +67,13 @@ int main( int argc, char *argv[] )
      char *ptr = strstr(buffer,comment);
      if(ptr)
        cout<<"\nNew Comment: "<<ptr<<"\n";
-     
-     
+
+     fstream myfile;
+     myfile.open ("comments.js");
+     myfile.seekp(-3, ios::end);
+     myfile<<"\n{\"comment\":\""<<ptr<<"\"},]};";
+     myfile.close();
+ 
      /* Write a response to the client */
      n = write(newsockfd,"msg received",12);
      if (n < 0) {
@@ -76,6 +82,8 @@ int main( int argc, char *argv[] )
        }
 
      close(newsockfd);
+     cout<<"\n done \n";
     }
+
     return 0; 
 }
