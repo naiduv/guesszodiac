@@ -105,7 +105,7 @@ int main( int argc, char *argv[] )
          return(0);
        }
 
-     close(newsockfd);
+     //     close(newsockfd);
      cout<<"\n closing socket \n";
     }
 
