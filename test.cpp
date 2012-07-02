@@ -41,7 +41,7 @@ int main( int argc, char *argv[] )
     * go in sleep mode and will wait for the incoming connection
     */
     while(1) {
-     cout<<"\n New listen cycle";
+     cout<<"\n***New listen cycle***\n";
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
 
