@@ -61,12 +61,13 @@
 	function updatecomments()
 	{
 		commentsarea = document.getElementById("commentsarea");          
-                commentsarea.innerHTML = '';
+                commentsareastr = commentsarea.innerHTML = '';
 		i = 0;
 		while(i<comments.bindings.length){
-			commentsarea.innerHTML = comments.bindings[i].comment;
+			commentsareastr += comments.bindings[i].comment;
 			i++;
 		}
+                comments.innerHTML = commentsareastr;
 	}
 
 	onselectchange = function(guess)
