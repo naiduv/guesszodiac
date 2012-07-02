@@ -43,14 +43,14 @@
 		writefile();
 	}
 
-	function success()
+	function success(retdata)
 	{
-		alert('yo;')
+		alert(retdata)
 	}
 
 	function writefile()
 	{
-		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001",success());
+		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", "wasup?", success());
 	}
 
 	onselectchange = function(guess)
