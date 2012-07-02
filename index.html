@@ -14,14 +14,16 @@
 	<textarea id="submitcomment"rows="5" cols="40">Leave a comment..</textarea><br>
 	<input type="submit" value="Submit" onclick="storecomment()"/>
 
-
+	<p id="commentsarea"></p>
 
 <script src = "./jsonstr.js"></script>
+<script src = "./comments.js"></script>
 <script src = "http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
 <script type="text/javascript">
 	window.onload = function() {
 		drawpage();
+		updatecomments();
 	}
 
 	var numpages = jsonstr.bindings.length;
@@ -46,12 +48,24 @@
 	updatepage = function()
 	{
 		drawpage();
+		updatecomments();
 	}
 
 	function storecomment()
 	{
 		comment = document.getElementById("submitcomment");		
-		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr>'+comment.value+'</commentstr>', function(data){ alert(data);});
+		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr><p>'+comment.value+'<p></commentstr>', function(data){ alert(data);});
+		updatecomments();
+	}
+
+	function updatecomments()
+	{
+		commentsarea = document.getElementById("commentsarea");
+		i = 0;
+		while(i<1){
+			commentsarea.innerHTML = comments.bindings[i].comment;
+			i++;
+		}
 	}
 
 	onselectchange = function(guess)
