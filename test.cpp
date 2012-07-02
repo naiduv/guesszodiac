@@ -2,11 +2,15 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <string.h>
+#include <iostream>
+
+using namespace std;
 
 int main( int argc, char *argv[] )
 {
-    int sockfd, newsockfd, portno, clilen;
-    char buffer[256];
+    socklen_t sockfd, newsockfd, portno, clilen;
+    char buffer[1024];
     struct sockaddr_in serv_addr, cli_addr;
     int  n;
 
@@ -15,10 +19,10 @@ int main( int argc, char *argv[] )
     if (sockfd < 0) 
     {
         perror("ERROR opening socket");
-        exit(1);
+	return(0);
     }
     /* Initialize socket structure */
-    bzero((char *) &serv_addr, sizeof(serv_addr));
+    memset((char *) &serv_addr, 0, sizeof(serv_addr));
     portno = 5001;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
@@ -29,7 +33,7 @@ int main( int argc, char *argv[] )
                           sizeof(serv_addr)) < 0)
     {
          perror("ERROR on binding");
-         exit(1);
+         return(0);
     }
 
     /* Now start listening for the clients, here process will
@@ -48,24 +52,34 @@ int main( int argc, char *argv[] )
      if (newsockfd < 0) 
        {
 	 perror("ERROR on accept");
-	 exit(1);
+	 return(0);
        }
 
      /* If connection is established then start communicating */
-     bzero(buffer,256);
-     n = read( newsockfd,buffer,255 );
+     memset(buffer, 0, sizeof(buffer));
+     n = recv( newsockfd,buffer,sizeof(buffer),MSG_PEEK);
      if (n < 0){
 	 perror("ERROR reading from socket");
-	 exit(1);
+	 return(0);
      }
-     printf("Here is the message: %s\n",buffer);
 
+     //read( newsockfd,buffer,1024 );
+     printf("Here is the message: %s\n",buffer);
+     
+     char comment[] ="<commentstr>"; 
+     char *ptr = strstr(buffer,comment);
+     if(ptr)
+       printf("found: %s",ptr);
+     
+     
      /* Write a response to the client */
      n = write(newsockfd,"msg received",12);
      if (n < 0) {
 	 perror("ERROR writing to socket");
-        exit(1);
+         return(0);
        }
+
+     close(newsockfd);
     }
     return 0; 
 }
