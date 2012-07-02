@@ -71,6 +71,7 @@ int main( int argc, char *argv[] )
      char comment[] ="<commentstr>"; 
      char *ptr = strstr(buffer,comment);
 
+     //no comment
      if(ptr) {
        cout<<"\nNew Comment: "<<ptr<<"\n";
      } else {
@@ -78,11 +79,18 @@ int main( int argc, char *argv[] )
        continue;
      }
 
-     cout<<"\n strlen ptr= "<<strlen(ptr);
+     //if there is only <commentstr></commentstr>
      if(strlen(ptr)<(sizeof(comment)*2+1)){
        cout<<"\n comment empty";
        continue;
      }
+
+     //if there is "\n"
+     if(strstr(ptr,"\n")){
+       cout<<"\n newline char";
+       continue;
+     }
+
 
      fstream myfile;
      myfile.open ("comments.js");
@@ -91,7 +99,7 @@ int main( int argc, char *argv[] )
      myfile.close();
  
      /* Write a response to the client */
-     n = write(newsockfd,"msg received",12);
+     n = write(newsockfd,"msg was received",18);
      if (n < 0) {
          cout<<"\nERROR writing to socket";
          return(0);

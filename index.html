@@ -54,8 +54,7 @@
 	function storecomment()
 	{
 		comment = document.getElementById("submitcomment");		
-		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr><p>'+comment.value+'<p></commentstr>', function(data){ alert(data);});
-		window.location.reload();
+		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr><p>'+comment.value+'<p></commentstr>', function(data){ window.location.reload();});
 	}
 
 	function updatecomments()
