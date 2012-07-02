@@ -40,8 +40,7 @@ int main( int argc, char *argv[] )
     * go in sleep mode and will wait for the incoming connection
     */
    int count = 0;
-   while(count<10) {
-     count++;
+   while(count<1) {
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
 
@@ -62,14 +61,11 @@ int main( int argc, char *argv[] )
 	 perror("ERROR reading from socket");
 	 return(0);
      }
-
-     //read( newsockfd,buffer,1024 );
-     printf("Here is the message: %s\n",buffer);
      
      char comment[] ="<commentstr>"; 
      char *ptr = strstr(buffer,comment);
      if(ptr)
-       printf("found: %s",ptr);
+       cout<<"\nNew Comment: "<<ptr<<"\n";
      
      
      /* Write a response to the client */
