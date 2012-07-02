@@ -14,7 +14,7 @@
 	<textarea id="submitcomment"rows="5" cols="40">Leave a comment..</textarea><br>
 	<input type="submit" value="Submit" onclick="storecomment()"/>
 
-	<p id="commentsarea"></p>
+	<font size="2"><p id="commentsarea"></p></font>
 
 <script src = "./jsonstr.js"></script>
 <script src = "./comments.js"></script>
@@ -55,19 +55,19 @@
 	{
 		comment = document.getElementById("submitcomment");		
 		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr><p>'+comment.value+'<p></commentstr>', function(data){ alert(data);});
-		updatecomments();
+		window.location.reload();
 	}
 
 	function updatecomments()
 	{
 		commentsarea = document.getElementById("commentsarea");          
-                commentsareastr = commentsarea.innerHTML = '';
+        commentsareastr = commentsarea.innerHTML = '';
 		i = 0;
 		while(i<comments.bindings.length){
 			commentsareastr += comments.bindings[i].comment;
 			i++;
 		}
-                commentsarea.innerHTML = commentsareastr;
+       	commentsarea.innerHTML = commentsareastr;
 	}
 
 	onselectchange = function(guess)
