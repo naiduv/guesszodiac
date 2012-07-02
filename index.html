@@ -10,6 +10,12 @@
 		<p id="result"></p>
 	</center>
 
+	<hr>
+	<textarea id="submitcomment"rows="5" cols="40">Leave a comment..</textarea><br>
+	<input type="submit" value="Submit" onclick="storecomment()"/>
+
+
+
 <script src = "./jsonstr.js"></script>
 <script src = "http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
@@ -40,12 +46,12 @@
 	updatepage = function()
 	{
 		drawpage();
-		writefile();
 	}
 
-	function writefile()
+	function storecomment()
 	{
-		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", "wasup?", function(data){ alert(data);});
+		comment = document.getElementById("submitcomment");		
+		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr>'+comment.value+'</commentstr>', function(data){ alert(data);});
 	}
 
 	onselectchange = function(guess)
