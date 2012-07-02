@@ -41,7 +41,7 @@ int main( int argc, char *argv[] )
     * go in sleep mode and will wait for the incoming connection
     */
     while(1) {
-
+     cout<<"\n New listen cycle";
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
 
@@ -62,11 +62,27 @@ int main( int argc, char *argv[] )
 	 perror("ERROR reading from socket");
 	 return(0);
      }
-     
+
+     if(strlen(buffer)==0) {
+       cout<<"\n buffer empty";
+       continue;
+     }
+
      char comment[] ="<commentstr>"; 
      char *ptr = strstr(buffer,comment);
-     if(ptr)
+
+     if(ptr) {
        cout<<"\nNew Comment: "<<ptr<<"\n";
+     } else {
+       cout<<"\n No Comment!!"<<"\n";
+       continue;
+     }
+
+     cout<<"\n strlen ptr= "<<strlen(ptr);
+     if(strlen(ptr)<(sizeof(comment)*2+1)){
+       cout<<"\n comment empty";
+       continue;
+     }
 
      fstream myfile;
      myfile.open ("comments.js");
@@ -82,7 +98,7 @@ int main( int argc, char *argv[] )
        }
 
      close(newsockfd);
-     cout<<"\n done \n";
+     cout<<"\n closing socket \n";
     }
 
     return 0; 
