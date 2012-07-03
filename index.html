@@ -17,7 +17,7 @@
 	<font size="2"><p id="commentsarea" style="background: #EBEBEB; color: #000; line-height: 1em; border: 0px solid #fff;"></p></font>
 
 <script src = "./jsonstr.js"></script>
-<script src = "./comments.js"></script>
+<!--<script src = "./comments.js"></script>!-->
 <script src = "http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
 <script type="text/javascript">
@@ -64,6 +64,12 @@
 
 	function updatecomments()
 	{
+		var comments = [];
+		$.getJSON("./comments.json", function(data) {
+			for(i in data)
+				comments.pushback(data[i]);
+		});
+
 		commentsarea = document.getElementById("commentsarea");          
         commentsareastr = commentsarea.innerHTML = '';
 		i = 0;
