@@ -24,13 +24,12 @@
 	</center>
 
 	<hr>
-	<textarea id="submitcomment"rows="5" cols="40">Leave a comment..</textarea><br>
+	<textarea id="submitcomment"rows="4" cols="40">Leave a comment..</textarea><br>
 	<input type="submit" value="Submit" onclick="storecomment()"/>
 
-	<font size="2"><p id="commentsarea" style="background: #EBEBEB; color: #000; line-height: 1em; border: 0px solid #fff;"></p></font>
+	<font size="2"><p id="commentsarea" style="background: #EBEBEB; color: #000; line-height: 1em; border: 0px solid #fff;"></p><a href="javascript:showallcomments=true; updatecomments();">show all<a></font>
 
 <script src = "./jsonstr.js"></script>
-<!--<script src = "./comments.js"></script>!-->
 <script src = "http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
 <script type="text/javascript">
@@ -43,7 +42,9 @@
 	var currimage = Math.floor(Math.random()*numpages);
 	var numshown = 0;
 	var score = 0;
+	var maxcomments = 5;
 	var hasguessed = false;
+	var showallcomments = false;
 
 	onnext = function()
 	{
@@ -89,9 +90,11 @@
 			       comments.push(data[i]);
 			       }
 			       comments.reverse();
-			       for(x in comments)
+			       for(x in comments) {
+			       if(x==maxcomments && !showallcomments)
+			       break;
 			       commentsareastr+=comments[x];
-
+			       }
 //			       console.log(comments);
 //			       console.log(commentsareastr);
 			       commentsarea = document.getElementById("commentsarea");
@@ -99,7 +102,7 @@
 			       commentsarea.innerHTML = commentsareastr;
 			       console.log(commentsareastr);  
 			       })
-			       }, 500);
+			       }, 400);
 
 	}
 
