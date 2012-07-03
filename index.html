@@ -87,10 +87,13 @@
 			       var comments = []
 			       for(i in data){
 			       comments.push(data[i]);
-			       commentsareastr+=comments[i];
-}
-			       console.log(comments);
-			       console.log(commentsareastr);
+			       }
+			       comments.reverse();
+			       for(x in comments)
+			       commentsareastr+=comments[x];
+
+//			       console.log(comments);
+//			       console.log(commentsareastr);
 			       commentsarea = document.getElementById("commentsarea");
 			       commentsarea.innerHTML = "";
 			       commentsarea.innerHTML = commentsareastr;
