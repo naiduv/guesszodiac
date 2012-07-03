@@ -1,6 +1,19 @@
 <html>
 <head>
 <title>Guess Zodiac Signs</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33113956-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
 <body>
 	<center>
@@ -68,30 +81,22 @@
 	{
                 console.log("in updatecomments");
 		
-		$.getJSON("./comments.json?"+ new Date().getTime(), function(data) {
-                        console.log("reading comments.json");
-var commentsareastr = '';
-			var comments = []
-			for(i in data){
-				comments.push(data[i]);
+			       setTimeout(function(){$.getJSON("./comments.json?"+ new Date().getTime(), function(data) {
+                               console.log("reading comments.json");
+			       var commentsareastr = '';
+			       var comments = []
+			       for(i in data){
+			       comments.push(data[i]);
 			       commentsareastr+=comments[i];
 }
-			console.log(comments);
-			console.log(commentsareastr);
-			commentsarea = document.getElementById("commentsarea");
-setTimeout(function(){
-commentsarea.innerHTML = "";
-commentsarea.innerHTML = commentsareastr;});
-console.log(commentsareastr);  
-		},500);
-
-
-//        commentsareastr = commentsarea.innerHTML = '';
-//		i = 0;
-//		while(i<comments.length){
-//			commentsareastr += comments[i];
-//			i++;
-//		}
+			       console.log(comments);
+			       console.log(commentsareastr);
+			       commentsarea = document.getElementById("commentsarea");
+			       commentsarea.innerHTML = "";
+			       commentsarea.innerHTML = commentsareastr;
+			       console.log(commentsareastr);  
+			       })
+			       }, 500);
 
 	}
 
