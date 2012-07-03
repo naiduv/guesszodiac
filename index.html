@@ -55,29 +55,44 @@
 	{
 		comment = document.getElementById("submitcomment");		
 		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr><p>'+comment.value+'<p></commentstr>', onsuccess());
+
+			       updatecomments();
         }
 
         function onsuccess()
         {
-		setTimeout( function() {window.location.reload()},200);
+		//setTimeout( function() {window.location.reload()},200);
         }
 
 	function updatecomments()
 	{
-		var comments = [];
-		$.getJSON("./comments.json", function(data) {
-			for(i in data)
-				comments.pushback(data[i]);
-		});
+                console.log("in updatecomments");
+		
+		$.getJSON("./comments.json?"+ new Date().getTime(), function(data) {
+                        console.log("reading comments.json");
+var commentsareastr = '';
+			var comments = []
+			for(i in data){
+				comments.push(data[i]);
+			       commentsareastr+=comments[i];
+}
+			console.log(comments);
+			console.log(commentsareastr);
+			commentsarea = document.getElementById("commentsarea");
+setTimeout(function(){
+commentsarea.innerHTML = "";
+commentsarea.innerHTML = commentsareastr;});
+console.log(commentsareastr);  
+		},500);
 
-		commentsarea = document.getElementById("commentsarea");          
-        commentsareastr = commentsarea.innerHTML = '';
-		i = 0;
-		while(i<comments.bindings.length){
-			commentsareastr += comments.bindings[i].comment;
-			i++;
-		}
-       	commentsarea.innerHTML = commentsareastr;
+
+//        commentsareastr = commentsarea.innerHTML = '';
+//		i = 0;
+//		while(i<comments.length){
+//			commentsareastr += comments[i];
+//			i++;
+//		}
+
 	}
 
 	onselectchange = function(guess)
@@ -114,7 +129,7 @@
 
 		image = document.getElementById("image");
 		image.innerHTML = '';
-		image.innerHTML = '<img src="'+jsonstr.bindings[currimage].image+'"><img>';		
+		//image.innerHTML = '<img src="'+jsonstr.bindings[currimage].image+'"><img>';		
 
 		fullname = document.getElementById("fullname");
 		fullname.innerHTML = '';

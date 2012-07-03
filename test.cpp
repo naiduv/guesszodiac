@@ -93,9 +93,9 @@ int main( int argc, char *argv[] )
 
 
      fstream myfile;
-     myfile.open ("comments.js");
-     myfile.seekp(-3, ios::end);
-     myfile<<"\n{\"comment\":\""<<ptr<<"\"},]};";
+     myfile.open ("comments.json");
+     myfile.seekp(-1, ios::end);
+     myfile<<",\""<<ptr<<"\"]";
      myfile.close();
  
      /* Write a response to the client */
