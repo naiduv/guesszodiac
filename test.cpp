@@ -68,6 +68,8 @@ int main( int argc, char *argv[] )
        continue;
      }
 
+     cout<<buffer;
+
      char comment[] ="<commentstr>"; 
      char *ptr = strstr(buffer,comment);
 

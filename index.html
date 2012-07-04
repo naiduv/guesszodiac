@@ -66,16 +66,12 @@
 	}
 
 	function storecomment()
-	{
-		comment = document.getElementById("submitcomment");		
-		var jqxhr = jQuery.post("http://www.guesszodiac.com:5001", '<commentstr><p>'+comment.value+'<p></commentstr>', onsuccess());
-
-			       updatecomments();
-        }
-
-        function onsuccess()
-        {
-		//setTimeout( function() {window.location.reload()},200);
+	{	
+	     comment = document.getElementById("submitcomment").value;	
+	     jQuery.post("test.php", 'comment=<p><commentstr>'+comment+'</commentstr></p>', function(data) {console.log(data)});
+            
+	     comment.value = "";
+	     updatecomments();
         }
 
 	function updatecomments()
